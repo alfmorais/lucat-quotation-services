@@ -1,0 +1,10 @@
+<h1>Confirmar exclusão</h1>
+
+<p>Você tem certeza que deseja excluir o imposto "{{ object }}"?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmar</button>
+</form>
+
+<a href="{% url 'tax-list' %}">Cancelar</a>

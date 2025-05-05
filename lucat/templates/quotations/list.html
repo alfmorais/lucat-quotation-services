@@ -1,0 +1,13 @@
+<h2>Lista de Cotações</h2>
+<a href="{% url 'quotation_create' %}">Criar nova cotação</a>
+
+<ul>
+    {% for quotation in quotations %}
+    <li>
+        {{ quotation }} - {{ quotation.created_at }}
+        <a href="{% url 'quotation_edit' quotation.pk %}">Editar</a>
+    </li>
+    {% empty %}
+    <li>Nenhuma cotação encontrada.</li>
+    {% endfor %}
+</ul>

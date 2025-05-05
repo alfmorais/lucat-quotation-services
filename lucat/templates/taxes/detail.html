@@ -1,0 +1,9 @@
+<h1>{{ object.description }}</h1>
+
+<p>Porcentagem: {{ object.percentage }}%</p>
+<p>Valor: {{ object.tax_amount}}</p>
+<p>Tipo: {{ object.get_scope_display }}</p>
+
+<a href="{% url 'tax-edit' object.pk %}">Editar</a> |
+<a href="{% url 'tax-delete' object.pk %}">Excluir</a> |
+<a href="{% url 'tax-list' %}">← Voltar</a>

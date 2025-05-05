@@ -1,23 +1,93 @@
-"""
-URL configuration for lucat project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-
 from django.contrib import admin
 from django.urls import path
+from products.views import (
+    ProductCreateView,
+    ProductDeleteView,
+    ProductDetailView,
+    ProductListView,
+    ProductUpdateView,
+)
+from quotations.views import (
+    QuotationCreateView,
+    QuotationListView,
+    QuotationUpdateView,
+)
+from taxes.views import (
+    TaxCreateView,
+    TaxDeleteView,
+    TaxDetailView,
+    TaxListView,
+    TaxUpdateView,
+)
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path(
+        "admin/",
+        admin.site.urls,
+    ),
+    path(
+        "products",
+        ProductListView.as_view(),
+        name="product-list",
+    ),
+    path(
+        "products/create/",
+        ProductCreateView.as_view(),
+        name="product-create",
+    ),
+    path(
+        "products/<int:pk>/",
+        ProductDetailView.as_view(),
+        name="product-detail",
+    ),
+    path(
+        "products/<int:pk>/update/",
+        ProductUpdateView.as_view(),
+        name="product-update",
+    ),
+    path(
+        "products/<int:pk>/delete/",
+        ProductDeleteView.as_view(),
+        name="product-delete",
+    ),
+    path(
+        "taxes/",
+        TaxListView.as_view(),
+        name="tax-list",
+    ),
+    path(
+        "taxes/create/",
+        TaxCreateView.as_view(),
+        name="tax-create",
+    ),
+    path(
+        "taxes/<int:pk>/",
+        TaxDetailView.as_view(),
+        name="tax-detail",
+    ),
+    path(
+        "taxes/<int:pk>/edit/",
+        TaxUpdateView.as_view(),
+        name="tax-edit",
+    ),
+    path(
+        "taxes/<int:pk>/delete/",
+        TaxDeleteView.as_view(),
+        name="tax-delete",
+    ),
+    path(
+        "quotations/",
+        QuotationListView.as_view(),
+        name="quotation_list",
+    ),
+    path(
+        "quotations/create/",
+        QuotationCreateView.as_view(),
+        name="quotation_create",
+    ),
+    path(
+        "quotations/<int:pk>/edit/",
+        QuotationUpdateView.as_view(),
+        name="quotation_edit",
+    ),
 ]

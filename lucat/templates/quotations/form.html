@@ -1,0 +1,26 @@
+<h2>{% if object.pk %}Editar{% else %}Nova{% endif %} Cotação</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ formset.management_form }}
+
+    <table>
+        <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço Unitário</th>
+            <th>Excluir</th>
+        </tr>
+        {% for form in formset %}
+        <tr>
+            <td>{{ form.product }}</td>
+            <td>{{ form.quantity }}</td>
+            <td>{{ form.unit_price }}</td>
+            <td>{% if form.instance.pk %}{{ form.DELETE }}{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<a href="{% url 'quotation_list' %}">Voltar</a>
