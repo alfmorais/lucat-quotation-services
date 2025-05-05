@@ -1,9 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Produtos{% endblock %}
+
+{% block content %}
 <h1>{% if form.instance.pk %}Editar{% else %}Criar{% endif %} Imposto</h1>
 
-<form method="post">
+<form method="post" novalidate>
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Salvar</button>
-</form>
 
-<a href="{% url 'tax-list' %}">← Voltar</a>
+    {% for field in form %}
+    <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+
+        {% if field.errors %}
+        <div class="invalid-feedback d-block">
+            {{ field.errors|striptags }}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="{% url 'tax-list' %}" class="btn btn-secondary">← Voltar</a>
+</form>
+{% endblock %}

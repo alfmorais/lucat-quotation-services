@@ -9,6 +9,7 @@ from products.views import (
 )
 from quotations.views import (
     QuotationCreateView,
+    QuotationItemDeleteView,
     QuotationListView,
     QuotationUpdateView,
 )
@@ -20,7 +21,14 @@ from taxes.views import (
     TaxUpdateView,
 )
 
+from .views import HomeView
+
 urlpatterns = [
+    path(
+        "",
+        HomeView.as_view(),
+        name="home",
+    ),
     path(
         "admin/",
         admin.site.urls,
@@ -78,16 +86,21 @@ urlpatterns = [
     path(
         "quotations/",
         QuotationListView.as_view(),
-        name="quotation_list",
+        name="quotation-list",
     ),
     path(
         "quotations/create/",
         QuotationCreateView.as_view(),
-        name="quotation_create",
+        name="quotation-create",
     ),
     path(
         "quotations/<int:pk>/edit/",
         QuotationUpdateView.as_view(),
-        name="quotation_edit",
+        name="quotation-edit",
+    ),
+    path(
+        "quotation/item/<int:pk>/delete/",
+        QuotationItemDeleteView.as_view(),
+        name="quotation-item-delete",
     ),
 ]

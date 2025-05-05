@@ -1,15 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Produtos{% endblock %}
+
+{% block content %}
 <h1>Lista de Impostos</h1>
 
-<a href="{% url 'tax-create' %}">Novo imposto</a>
+<a href="{% url 'tax-create' %}" class="btn btn-primary mb-3">Novo imposto</a>
 
-<ul>
-    {% for tax in taxes %}
-    <li>
-        <a href="{% url 'tax-detail' tax.pk %}">
-            {{ tax.description }} ({{ tax.scope }}) - {{ tax.percentage }} OU {{ tax.tax_amount}}%
-        </a>
-    </li>
-    {% empty %}
-    <li>Nenhum imposto cadastrado.</li>
-    {% endfor %}
-</ul>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Descrição</th>
+                <th>Escopo</th>
+                <th>Valor (%)</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tax in taxes %}
+            <tr>
+                <td>{{ tax.description }}</td>
+                <td>{{ tax.scope }}</td>
+                <td>
+                    {% if tax.percentage %}
+                    {{ tax.percentage }}%
+                    {% else %}
+                    {{ tax.tax_amount }}
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'tax-detail' tax.pk %}" class="btn btn-sm btn-info">Detalhes</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Nenhum imposto cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Produtos{% endblock %}
+{% block content %}
 <h1>Excluir Produto</h1>
 <p>Tem certeza que deseja excluir "{{ object.name }}"?</p>
 <form method="post">
@@ -5,3 +8,4 @@
     <button type="submit">Sim, excluir</button>
 </form>
 <a href="{% url 'product-list' %}">Cancelar</a>
+{% endblock %}
